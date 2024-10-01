@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 const libraries = ["places"];
 
-function MyMap() {
+function SearchBar() {
     const inputref = useRef(null);
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -21,7 +21,7 @@ function MyMap() {
 
     const navigate = useNavigate();
     const handleRedirect = () => {
-        navigate('/search')
+        navigate('/searchresults')
     }
 
     return (
@@ -61,4 +61,4 @@ function MyMap() {
     )
 }
 
-export default MyMap;
+export default SearchBar;

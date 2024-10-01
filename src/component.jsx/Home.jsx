@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Home = () => {
-    return(
+    return (
         <div>
-            <h1>Hommye</h1>
-            
+            <SearchBar />
         </div>
     )
 }

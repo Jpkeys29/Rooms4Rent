@@ -31,8 +31,9 @@ const SearchResults = () => {
 
     return (
         <div>
-            <Box>
-
-            </Box>
+            <p>Search Results</p>
         </div>
     )
+}
+
+export default SearchResults;
