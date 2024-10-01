@@ -8,18 +8,21 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import SearchBar from './component.jsx/SearchBar';
 import SearchResults from './component.jsx/SearchResults';
+import Account from './component.jsx/Account';
+import Post from './component.jsx/Post';
 
 
 
 function App() {
   return (
     <div>
-      <header style={{backgroundColor:"#f8f9fa", height:"100px"}}>
-      <h1 style={{textAlign:"center"}}>Hommye</h1>
+      <header style={{ backgroundColor: "#f8f9fa", height: "100px" }}>
+        <h1 style={{ textAlign: "center" }}>Hommye</h1>
         <nav>
-          <ul style={{listStyleType:"none", display:"flex", justifyContent:"space-around"}}>
-            <li>Account</li>
-            <li>Post ad</li>
+          <ul style={{ listStyleType: "none", display: "flex", justifyContent: "space-around" }}>
+              <li><Link to={'/account'}>Account</Link> </li>
+              <li><Link to={'/post'} >Post a room</Link> </li>
+              <li><Link to={'/'}>Home</Link> </li>
           </ul>
         </nav>
       </header>
@@ -27,7 +30,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='searchbar' element={<SearchBar />} />
-          <Route path='searchresults' element={<SearchResults/>} />
+          <Route path='searchresults' element={<SearchResults />} />
+          <Route path='account' element={<Account/>} />
+          <Route path='post' element={<Post/>} />
         </Routes>
       </main>
     </div>

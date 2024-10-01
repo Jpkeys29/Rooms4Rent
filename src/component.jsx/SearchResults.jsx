@@ -31,7 +31,15 @@ const SearchResults = () => {
 
     return (
         <div>
-            <p>Search Results</p>
+            <h3>Search Results</h3>
+            {posting.slice(0, 20).map((p, index) => (
+                <li key={p.id || index} style={{ listStyleType: "none"}}>
+                    <p>{p.title}</p>
+                    <p>{p.address}</p>
+                    <br/>
+                </li>
+                
+            ))}
         </div>
     )
 }
