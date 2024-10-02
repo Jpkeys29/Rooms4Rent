@@ -12,6 +12,7 @@ const Post = ({ p }) => {
                 <CardMedia image={p.image} />
                 <CardContent>
                     <div >
+                        <CardMedia image={p.image}/>
                         <Typography>{p.title}</Typography>
                         <Typography>{p.address}</Typography>
                         <Typography>{p.price}</Typography>

@@ -2,14 +2,14 @@ import { useState } from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-const Account = () => {
-    return(
+const PostRoom = () => {
+    return (
         <Box>
             <Typography variant="h2" color="black">
-                This is your account
+                Post a room
             </Typography>
         </Box>
     )
 }
 
-export default Account;
+export default PostRoom;

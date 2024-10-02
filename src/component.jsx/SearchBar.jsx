@@ -41,21 +41,22 @@ function SearchBar() {
                         style={{
                             boxSizing: 'border-box',
                             border: '1px solid transparent',
-                            width: '50%',
-                            height: '50px',
+                            width: '60%',
+                            height: '60px',
                             padding: '0 12px',
                             borderRadius: '3px',
                             boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
                             fontSize: '14px',
                             outline: 'none',
                             textOverflow: 'ellipses',
-                            marginTop: '30px',
+                            marginTop: '40px',
                         }}
                     />
                 </StandaloneSearchBox>
             }
             <Button
                 variant="outlined"
+                size='large'
                 sx={{ marginTop: '15px' }}
                 href={`searchresults?area_short_name=${area.short_name}&area_long_name=${area.long_name}`}
             >
