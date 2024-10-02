@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography"
 import SearchBar from "./component.jsx/SearchBar"
 import SearchResults from "./component.jsx/SearchResults"
 import Account from "./component.jsx/Account"
-import SignIn from "./component.jsx/SignIn"
 import Post from "./component.jsx/Post"
 import { auth } from "./firebase/config"
 
@@ -45,10 +44,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="searchbar" element={<SearchBar />} />
           <Route path="searchresults" element={<SearchResults />} />
-          <Route
-            path="account"
-            element={user ? <Account /> : <SignIn setUser={setUser} />}
-          />
+          <Route path="account" element={<Account />} />
           <Route path="post" element={<Post />} />
         </Routes>
       </main>
