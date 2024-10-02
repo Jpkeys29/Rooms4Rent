@@ -9,16 +9,24 @@ const Post = ({ p }) => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Card style={{ margin: "3%", width: "70vw", }}>
-                <CardMedia image={p.image} />
+                <CardMedia
+                    sx={{ height: 140 }}
+                    image={p.image}
+                    title="home"
+                />
                 <CardContent>
                     <div >
-                        <CardMedia image={p.image}/>
-                        <Typography>{p.title}</Typography>
+                        <CardMedia image={p.image} />
+                        <Typography gutterBottom variant="h5" component="div">{p.title}</Typography>
                         <Typography>{p.address}</Typography>
                         <Typography>{p.price}</Typography>
-                        <Typography>{p.description}</Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>{p.description}</Typography>
                     </div>
                 </CardContent>
+                <CardActions>
+                    <Button size="small">Contact</Button>
+                    <Button size="small">Learn More</Button>
+                </CardActions>
             </Card>
         </div>
     )
