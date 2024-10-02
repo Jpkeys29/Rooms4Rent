@@ -1,15 +1,7 @@
-import { useState } from 'react'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import React from "react"
 
 const Account = () => {
-    return(
-        <Box>
-            <Typography variant="h2" color="black">
-                This is your account
-            </Typography>
-        </Box>
-    )
+  return <div>User Account</div>
 }
 
-export default Account;
+export default Account
