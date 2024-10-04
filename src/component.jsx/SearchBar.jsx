@@ -1,6 +1,6 @@
 import { GoogleMap, useJsApiLoader, StandaloneSearchBox } from '@react-google-maps/api';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 const libraries = ["places"];
@@ -13,6 +13,7 @@ function SearchBar() {
         libraries,
     })
     const [area, setArea] = useState({ short_name: "", long_name: "" })
+    const navigate = useNavigate();
     console.log(isLoaded)
 
     const handleOnPlacesChanged = () => {
@@ -25,6 +26,16 @@ function SearchBar() {
             let short_name = find_locality[0]?.short_name
             let long_name = find_locality[0]?.long_name
             setArea({ short_name: short_name, long_name: long_name })
+        }
+    }
+
+    const handleSearch = () => {
+        console.log("Area object:", area);
+        if (area && area.short_name && area.long_name){
+            const searchUrl = `searchresults?area_short_name=${area.short_name}&area_long_name=${area.long_name}`
+            navigate(searchUrl)
+        }else{
+            setArea({ short_name: "", long_name: "" })
         }
     }
 
@@ -58,7 +69,7 @@ function SearchBar() {
                 variant="outlined"
                 size='large'
                 sx={{ marginTop: '15px' }}
-                href={`searchresults?area_short_name=${area.short_name}&area_long_name=${area.long_name}`}
+                onClick={handleSearch}
             >
                 Search
             </Button>
