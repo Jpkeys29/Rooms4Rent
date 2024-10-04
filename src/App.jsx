@@ -12,6 +12,7 @@ import Account from "./component.jsx/Account"
 import Post from "./component.jsx/Post"
 import { auth } from "./firebase/config"
 import SignIn from "./component.jsx/SignIn"
+import SignUp from "./component.jsx/SignUp"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 
 function App() {
@@ -62,7 +63,16 @@ function App() {
           <Route path="searchresults" element={<SearchResults />} />
           <Route
             path="account"
-            element={user ? <Account /> : <SignIn setUser={setUser} />}
+            element={
+              user ? (
+                <Account />
+              ) : (
+                <>
+                  <SignIn setUser={setUser} />
+                  <SignUp setUser={setUser} />
+                </>
+              )
+            }
           />
           <Route path="post" element={<Post />} />
         </Routes>
