@@ -6,7 +6,7 @@
     "image": "http://dummyimage.com/216x100.png/dddddd/000000",
     "price": 96,
     "availabity": true,
-    "address": "68 Sycamore Crossing"
+    "address": "68 Sycamore Crossing, South Brisbane"
   },
   {
     "id": 2,
@@ -1104,7 +1104,7 @@
     "image": "http://dummyimage.com/250x100.png/ff4444/ffffff",
     "price": 61,
     "availabity": false,
-    "address": "71724 Meadow Vale Crossing"
+    "address": "71724 Meadow Vale Crossing, South Brisbane"
   },
   {
     "id": 124,
@@ -2472,7 +2472,7 @@
     "image": "http://dummyimage.com/248x100.png/5fa2dd/ffffff",
     "price": 32,
     "availabity": true,
-    "address": "2431 Lunder Drive"
+    "address": "2431 Lunder Drive, South Brisbane"
   },
   {
     "id": 276,
@@ -3381,7 +3381,7 @@
     "image": "http://dummyimage.com/209x100.png/ff4444/ffffff",
     "price": 25,
     "availabity": false,
-    "address": "3 Schurz Place"
+    "address": "3 Schurz Place, South Brisbane"
   },
   {
     "id": 377,
@@ -4551,7 +4551,7 @@
     "image": "http://dummyimage.com/221x100.png/dddddd/000000",
     "price": 29,
     "availabity": true,
-    "address": "2749 Memorial Place"
+    "address": "2749 Memorial Place, South Brisbane"
   },
   {
     "id": 507,
