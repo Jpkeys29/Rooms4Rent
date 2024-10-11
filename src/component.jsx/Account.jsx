@@ -13,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from "@mui/material/TextField"
-// import Button from "@mui/material/Button";
+import axios from "axios";
 
 const Account = () => {
 
@@ -28,17 +28,22 @@ const Account = () => {
 
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-      setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
-    }
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+    const addAccount = async(userProfile) => {
       try {
-        const response = await fetch.post('', userProfile);
+        const response = await fetch('URL', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json ; charset=UTF-8'
+          },
+          body: JSON.stringify(userProfile),
+        });
         console.log('FROM REACT:', response);
         if (response.status === 201) {
           alert('Profile created, Yay!')
+          .then(response => response.json())
+          .then(data => {
+            setUserProfile(data);
+          })
           navigate('/account');
         } else {
           console.error('No dashboard for you')
@@ -46,7 +51,16 @@ const Account = () => {
       } catch (error) {
         console.log('Error:', error)
       }
+    };
+
+    const handleSubmit = (e) => {
+      e.prevent.Default();
     }
+
+    const handleChange = (e) => {
+      setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
+    }
+    
   };
   return (
     <Box sx={{
