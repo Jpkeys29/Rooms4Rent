@@ -15,10 +15,10 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from "@mui/material/TextField"
 import axios from "axios";
 
-const Account = () => {
 
   const Account = () => {
     const [userProfile, setUserProfile] = useState({
+      id:'' ,
       name: '',
       email: '',
       photo: '',
@@ -28,7 +28,7 @@ const Account = () => {
 
     const navigate = useNavigate();
 
-    const addAccount = async(userProfile) => {
+    const addAccount = async (userProfile) => {
       try {
         const response = await fetch('URL', {
           method: 'POST',
@@ -36,14 +36,15 @@ const Account = () => {
             'Content-type': 'application/json ; charset=UTF-8'
           },
           body: JSON.stringify(userProfile),
+
         });
         console.log('FROM REACT:', response);
         if (response.status === 201) {
           alert('Profile created, Yay!')
-          .then(response => response.json())
-          .then(data => {
-            setUserProfile(data);
-          })
+            .then(response => response.json())
+            .then(data => {
+              setUserProfile(data);
+            })
           navigate('/account');
         } else {
           console.error('No dashboard for you')
@@ -54,14 +55,14 @@ const Account = () => {
     };
 
     const handleSubmit = (e) => {
-      e.prevent.Default();
+      e.preventDefault();
+      console.log(userProfile)
     }
 
     const handleChange = (e) => {
       setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
     }
-    
-  };
+
   return (
     <Box sx={{
       display: 'flex',
@@ -86,6 +87,7 @@ const Account = () => {
           <FormControl>
             <FormLabel>Name</FormLabel>
             <TextField
+              onChange={handleChange}
               id="name"
               type="name"
               name="name"
@@ -102,6 +104,7 @@ const Account = () => {
           <FormControl>
             <FormLabel htmlFor="email">Email</FormLabel>
             <TextField
+              onChange={handleChange}
               id="email"
               type="email"
               name="email"
@@ -143,7 +146,7 @@ const Account = () => {
               <FormControlLabel value="other" control={<Radio />} label="Other" />
             </RadioGroup>
           </FormControl>
-          <Button variant="contained">Create</Button>
+          <Button variant="contained" onClick={handleSubmit}>Create</Button>
         </CardContent>
 
       </Card>
