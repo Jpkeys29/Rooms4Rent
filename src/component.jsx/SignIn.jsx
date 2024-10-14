@@ -17,8 +17,7 @@ import ForgotPassword from "./ForgotPassword"
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from "./CustomIcons"
 import { auth } from "../firebase/config"
 import { signInWithEmailAndPassword } from "firebase/auth"
-// import AppTheme from "../shared-theme/AppTheme"
-// import ColorModeSelect from "../shared-theme/ColorModeSelect"
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -123,11 +122,20 @@ export default function SignIn({ setUser }) {
     return isValid
   }
 
+  const handleGoogleSignIn = () => {
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(auth, provider)
+      .then(result => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+      }).catch(error => {
+        console.log('Error:', error)
+      })
+  }
+
   return (
-    // <AppTheme {...props}>
-    //   <CssBaseline enableColorScheme />
     <SignInContainer direction="column" justifyContent="space-between">
-      {/* <ColorModeSelect sx={{ position: "fixed", top: "1rem", right: "1rem" }} /> */}
       <Card variant="outlined">
         <SitemarkIcon />
         <Typography
@@ -225,7 +233,8 @@ export default function SignIn({ setUser }) {
             type="submit"
             fullWidth
             variant="outlined"
-            onClick={() => alert("Sign in with Google")}
+            onClick={() => handleGoogleSignIn()}
+            // onClick={() => alert("Sign in with Google")}
             startIcon={<GoogleIcon />}
           >
             Sign in with Google
@@ -242,6 +251,5 @@ export default function SignIn({ setUser }) {
         </Box>
       </Card>
     </SignInContainer>
-    // </AppTheme>
   )
 }
