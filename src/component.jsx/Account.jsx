@@ -63,6 +63,14 @@ import axios from "axios";
       setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
     }
 
+    const handleRadioButton = (e) => {
+      const { name, value } = e.target;
+      setUserProfile({
+        ...userProfile, [name] : value,
+      })
+
+    }
+
   return (
     <Box sx={{
       display: 'flex',
@@ -126,20 +134,26 @@ import axios from "axios";
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
+              // name="row-radio-buttons-group"
+              name="gender"
+              value={userProfile.gender}
+              onChange={handleRadioButton}
             >
               <FormControlLabel value="female" control={<Radio />} label="Female" />
               <FormControlLabel value="male" control={<Radio />} label="Male" />
               <FormControlLabel value="other" control={<Radio />} label="Other" />
-
             </RadioGroup>
           </FormControl>
+
           <FormControl>
             <FormLabel id="demo-row-radio-buttons-group-label">Occupation</FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
+              // name="row-radio-buttons-group"
+              name="occupation"
+              value={userProfile.occupation}
+              onChange={handleRadioButton}
             >
               <FormControlLabel value="professional" control={<Radio />} label="Professional" />
               <FormControlLabel value="student" control={<Radio />} label="Student" />
