@@ -18,6 +18,7 @@ import { GoogleIcon, FacebookIcon, SitemarkIcon } from "./CustomIcons"
 import { auth } from "../firebase/config"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { Link as RouterLink } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -137,11 +138,11 @@ export default function SignIn({ setUser }) {
   return (
     <SignInContainer direction="column" justifyContent="space-between">
       <Card variant="outlined">
-        <SitemarkIcon />
+        {/* <SitemarkIcon /> */}
         <Typography
           component="h1"
           variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)", textAlign:"center" }}
         >
           Sign in
         </Typography>
@@ -217,13 +218,7 @@ export default function SignIn({ setUser }) {
           <Typography sx={{ textAlign: "center" }}>
             Don&apos;t have an account?{" "}
             <span>
-              <Link
-                href="/material-ui/getting-started/templates/sign-in/"
-                variant="body2"
-                sx={{ alignSelf: "center" }}
-              >
-                Sign up
-              </Link>
+            <Link component={RouterLink} to={"/signup"}>Sign up </Link>{" "}
             </span>
           </Typography>
         </Box>
@@ -234,12 +229,11 @@ export default function SignIn({ setUser }) {
             fullWidth
             variant="outlined"
             onClick={() => handleGoogleSignIn()}
-            // onClick={() => alert("Sign in with Google")}
             startIcon={<GoogleIcon />}
           >
             Sign in with Google
           </Button>
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="outlined"
@@ -247,7 +241,7 @@ export default function SignIn({ setUser }) {
             startIcon={<FacebookIcon />}
           >
             Sign in with Facebook
-          </Button>
+          </Button> */}
         </Box>
       </Card>
     </SignInContainer>
