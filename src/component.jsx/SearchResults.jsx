@@ -16,7 +16,19 @@ const SearchResults = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const area_short_name = searchParams.get("area_short_name") // e.g., ?myParam=value
   const area_long_name = searchParams.get("area_long_name") // e.g., ?myParam=value
-  console.log(area_long_name, area_short_name)
+  console.log("log in search results", area_long_name, area_short_name)
+
+  function findCommonWords(str1, str2) {
+    // Split the strings into arrays of words
+    const words1 = str1.toLowerCase().split(/\W+/)
+    const words2 = str2.toLowerCase().split(/\W+/)
+
+    // Find the common words using a Set for faster lookups
+    const commonWords = words1.filter((word) => words2.includes(word))
+
+    // Remove duplicates by converting the result to a Set and back to an array
+    return [...new Set(commonWords)]
+  }
   useEffect(() => {
     const fetchPosting = async () => {
       try {
@@ -27,12 +39,9 @@ const SearchResults = () => {
         const jsonData = await response.json()
         console.log(jsonData)
         // filter data based on search query parameters
+
         let jsonDataFiltered = jsonData.filter(
-          (item) =>
-            item.address
-              .toLowerCase()
-              .includes(area_short_name.toLowerCase()) ||
-            item.address.toLowerCase().includes(area_long_name.toLowerCase())
+          (item) => findCommonWords(area_short_name, item.address).length !== 0
         )
         setPosting(jsonDataFiltered)
       } catch (error) {
