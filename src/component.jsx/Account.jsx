@@ -1,100 +1,121 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { useNavigate } from "react-router-dom"
+import Avatar from "@mui/material/Avatar"
+import Box from "@mui/material/Box"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import Button from "@mui/material/Button"
+import Typography from "@mui/material/Typography"
+import Radio from "@mui/material/Radio"
+import RadioGroup from "@mui/material/RadioGroup"
+import FormControlLabel from "@mui/material/FormControlLabel"
+import FormControl from "@mui/material/FormControl"
+import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
-import client from "../sanityClient";
+// import client from "../sanityClient";
 import { auth } from "../firebase/config"
 import axios from "axios";
 
+const Account = () => {
+  const [userProfile, setUserProfile] = useState({
+    id: "",
+    name: "",
+    email: "",
+    photo: "",
+    gender: "",
+    occupation: "",
+  })
 
-  const Account = () => {
-    const [userProfile, setUserProfile] = useState({
-      id:'' ,
-      name: '',
-      email: '',
-      photo: '',
-      gender: '',
-      occupation: ''
-    });
+  const navigate = useNavigate()
 
-    const navigate = useNavigate();
-
-    const addAccount = async (userProfile) => {
-      try {
-        const response = await fetch('URL', {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json ; charset=UTF-8'
-          },
-          body: JSON.stringify(userProfile),
-
-        });
-        console.log('FROM REACT:', response);
-        if (response.status === 201) {
-          alert('Profile created, Yay!')
-            .then(response => response.json())
-            .then(data => {
-              setUserProfile(data);
-            })
-          navigate('/account');
-        } else {
-          console.error('No dashboard for you')
-        }
-      } catch (error) {
-        console.log('Error:', error)
+  const addAccount = async (userProfile) => {
+    try {
+      const response = await fetch("URL", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json ; charset=UTF-8",
+        },
+        body: JSON.stringify(userProfile),
+      })
+      console.log("FROM REACT:", response)
+      if (response.status === 201) {
+        alert("Profile created, Yay!")
+          .then((response) => response.json())
+          .then((data) => {
+            setUserProfile(data)
+          })
+        navigate("/account")
+      } else {
+        console.error("No dashboard for you")
       }
-    };
+    } catch (error) {
+      console.log("Error:", error)
+    }
+  }
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(userProfile,auth.currentUser.uid)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(userProfile,auth.currentUser.uid)
       client.createOrReplace({_id:auth.currentUser.uid , _type:"accountdetails",name:userProfile.name, email:userProfile.email, gender:userProfile.gender, occupation:userProfile.occupation})
 
-    }
+  }
 
-    const handleChange = (e) => {
-      setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
-    }
+  const handleChange = (e) => {
+    setUserProfile({ ...userProfile, [e.target.name]: e.target.value })
+  }
 
-    const handleRadioButton = (e) => {
-      const { name, value } = e.target;
-      setUserProfile({
-        ...userProfile, [name] : value,
-      })
-    }
+  const handleRadioButton = (e) => {
+    const { name, value } = e.target
+    setUserProfile({
+      ...userProfile,
+      [name]: value,
+    })
+  }
 
+  const handleUploadPhoto = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setUserProfile((prev) => ({
+          ...prev,
+          photo: reader.result,
+        }))
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+  console.log("userProfile", userProfile)
   return (
-    <Box sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Card sx={{ width: 440, height: 600 }} variant="outlined">
         <Typography
           component="h1"
           variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)", textAlign: "center" }}
+          sx={{
+            width: "100%",
+            fontSize: "clamp(2rem, 10vw, 2.15rem)",
+            textAlign: "center",
+          }}
         >
           Account{" "}
         </Typography>
-        <CardContent sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "50%",
-          gap: 2,
-          width: 400
-        }}>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "50%",
+            gap: 2,
+            width: 400,
+          }}
+        >
           <FormControl>
             <FormLabel>Name</FormLabel>
             <TextField
@@ -109,7 +130,6 @@ import axios from "axios";
               fullWidth
               variant="outlined"
               sx={{ ariaLabel: "name" }}
-
             />
           </FormControl>
           <FormControl>
@@ -130,10 +150,29 @@ import axios from "axios";
           </FormControl>
 
           <FormLabel>Photo</FormLabel>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          {userProfile.photo ? (
+            <img
+              src={userProfile.photo}
+              alt="Uploaded Preview"
+              style={{ width: 56, height: 56, borderRadius: "50%" }}
+            />
+          ) : (
+            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          )}
+          <Button variant="outlined" component="label">
+            Upload Photo
+            <input
+              type="file"
+              hidden
+              accept="image/*"
+              onChange={handleUploadPhoto}
+            />
+          </Button>
 
           <FormControl>
-            <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Gender
+            </FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
@@ -141,14 +180,24 @@ import axios from "axios";
               value={userProfile.gender}
               onChange={handleRadioButton}
             >
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel
+                value="female"
+                control={<Radio />}
+                label="Female"
+              />
               <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Other"
+              />
             </RadioGroup>
           </FormControl>
 
           <FormControl>
-            <FormLabel id="demo-row-radio-buttons-group-label">Occupation</FormLabel>
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Occupation
+            </FormLabel>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
@@ -156,14 +205,27 @@ import axios from "axios";
               value={userProfile.occupation}
               onChange={handleRadioButton}
             >
-              <FormControlLabel value="professional" control={<Radio />} label="Professional" />
-              <FormControlLabel value="student" control={<Radio />} label="Student" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
+              <FormControlLabel
+                value="professional"
+                control={<Radio />}
+                label="Professional"
+              />
+              <FormControlLabel
+                value="student"
+                control={<Radio />}
+                label="Student"
+              />
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Other"
+              />
             </RadioGroup>
           </FormControl>
-          <Button variant="contained" onClick={handleSubmit}>Create</Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            Create
+          </Button>
         </CardContent>
-
       </Card>
     </Box>
   )
