@@ -140,18 +140,14 @@ export default function SignUp({ setUser }) {
   }
 
   return (
-    // <AppTheme {...props}>
-    //   <CssBaseline enableColorScheme />
     <SignInContainer direction="column" justifyContent="space-between">
-      {/* <ColorModeSelect sx={{ position: "fixed", top: "1rem", right: "1rem" }} /> */}
       <Card variant="outlined">
-        <SitemarkIcon />
         <Typography
           component="h1"
           variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)",textAlign:"center" }}
         >
-          Register{" "}
+          Sign Up{" "}
         </Typography>
         <Box
           component="form"
@@ -169,7 +165,7 @@ export default function SignUp({ setUser }) {
             <TextField
               error={emailError}
               helperText={emailErrorMessage}
-              id="email"
+              id="SignUpEmail"
               type="email"
               name="email"
               placeholder="your@email.com"
@@ -200,7 +196,7 @@ export default function SignUp({ setUser }) {
               name="password"
               placeholder="••••••"
               type="password"
-              id="password"
+              id="SignUpPassword"
               autoComplete="current-password"
               autoFocus
               required
@@ -223,16 +219,6 @@ export default function SignUp({ setUser }) {
             Register
           </Button>
           <Typography sx={{ textAlign: "center" }}>
-            Don&apos;t have an account?{" "}
-            <span>
-              <Link
-                href="/material-ui/getting-started/templates/sign-in/"
-                variant="body2"
-                sx={{ alignSelf: "center" }}
-              >
-                Sign up
-              </Link>
-            </span>
           </Typography>
         </Box>
         <Divider>or</Divider>
@@ -246,7 +232,8 @@ export default function SignUp({ setUser }) {
           >
             Sign Up with Google
           </Button>
-          <Button
+
+          {/* <Button
             type="submit"
             fullWidth
             variant="outlined"
@@ -254,10 +241,9 @@ export default function SignUp({ setUser }) {
             startIcon={<FacebookIcon />}
           >
             Sign in with Facebook
-          </Button>
+          </Button> */}
         </Box>
       </Card>
     </SignInContainer>
-    // </AppTheme>
   )
 }

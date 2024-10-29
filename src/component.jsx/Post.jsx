@@ -9,10 +9,9 @@ const Post = ({ p }) => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card style={{ margin: "3%", width: "70vw" }}>
-        <CardMedia image={p?.image} />
         <CardContent>
           <div>
-            <CardMedia image={p?.image} />
+            <p>Postings</p>
             <Typography>{p?.title}</Typography>
             <Typography>{p?.address}</Typography>
             <Typography>{p?.price}</Typography>

@@ -14,6 +14,7 @@ import { auth } from "./firebase/config"
 import SignIn from "./component.jsx/SignIn"
 import SignUp from "./component.jsx/SignUp"
 import { onAuthStateChanged, signOut } from "firebase/auth"
+import PostRoom from "./component.jsx/PostRoom"
 
 function App() {
   console.log("auth", auth.currentUser)
@@ -32,7 +33,7 @@ function App() {
   return (
     <div>
       <header style={{ backgroundColor: "#f8f9fa", height: "100px" }}>
-        <h1 style={{ textAlign: "center" }}>Hommye</h1>
+        <h1 style={{ textAlign: "center" }}>Rommye</h1>
         <nav>
           <ul
             style={{
@@ -42,16 +43,16 @@ function App() {
             }}
           >
             <li>
-              <Link to={"/account"}>Account</Link>{" "}
+              <Link to={"/post"}>Post a room</Link>{" "}
             </li>
             <li>
-              <Link to={"/post"}>Post a room</Link>{" "}
+              <Link to={"/account"}>Account</Link>{" "}
             </li>
             <li>
               <Link to={"/"}>Home</Link>{" "}
             </li>
             <li>
-              <Link onClick={handleLogOut}>Log Out</Link>{" "}
+              <Link onClick={handleLogOut} to={'/'}>Log Out</Link>{" "}
             </li>
           </ul>
         </nav>
@@ -61,6 +62,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="searchbar" element={<SearchBar />} />
           <Route path="searchresults" element={<SearchResults />} />
+          <Route path="signup" element={<SignUp />} />
           <Route
             path="account"
             element={
@@ -68,13 +70,20 @@ function App() {
                 <Account />
               ) : (
                 <>
-                  <SignIn setUser={setUser} />
-                  <SignUp setUser={setUser} />
+                  <SignIn setUser={setUser}/>
+                  {/* <SignUp setUser={setUser}/> */}
                 </>
               )
             }
           />
-          <Route path="post" element={<Post />} />
+          <Route
+            path="post"
+            element={user ?
+              <PostRoom /> :
+              <><SignIn />
+                {/* <SignUp /> */}
+              </>
+            } />
         </Routes>
       </main>
     </div>
