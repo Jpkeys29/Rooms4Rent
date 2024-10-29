@@ -13,6 +13,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from "@mui/material/TextField"
+import client from "../sanityClient";
+import { auth } from "../firebase/config"
 import axios from "axios";
 
 
@@ -56,7 +58,9 @@ import axios from "axios";
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(userProfile)
+      console.log(userProfile,auth.currentUser.uid)
+      client.createOrReplace({_id:auth.currentUser.uid , _type:"accountdetails",name:userProfile.name, email:userProfile.email, gender:userProfile.gender, occupation:userProfile.occupation})
+
     }
 
     const handleChange = (e) => {
@@ -68,7 +72,6 @@ import axios from "axios";
       setUserProfile({
         ...userProfile, [name] : value,
       })
-
     }
 
   return (
@@ -134,7 +137,6 @@ import axios from "axios";
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              // name="row-radio-buttons-group"
               name="gender"
               value={userProfile.gender}
               onChange={handleRadioButton}
@@ -150,7 +152,6 @@ import axios from "axios";
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              // name="row-radio-buttons-group"
               name="occupation"
               value={userProfile.occupation}
               onChange={handleRadioButton}

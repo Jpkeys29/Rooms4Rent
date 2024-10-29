@@ -18,14 +18,14 @@ function SearchBar() {
 
     const handleOnPlacesChanged = () => {
         let address = inputref.current.getPlaces()
-        console.log(address)
+        console.log('address:', address)
         let locality = null
         if (address.length !== 0) {
-            let address_components = address[0].address_components
-            let find_locality = address_components.filter((item) => item.types.includes("locality"))
-            let short_name = find_locality[0]?.short_name
-            let long_name = find_locality[0]?.long_name
-            setArea({ short_name: short_name, long_name: long_name })
+            let formatted_address = address[0].formatted_address
+            // let find_locality = address_components.filter((item) => item.types.includes("locality"))
+            // let short_name = find_locality[0]?.short_name
+            // let long_name = find_locality[0]?.long_name
+            setArea({ short_name: formatted_address, long_name: formatted_address })
         }
     }
 

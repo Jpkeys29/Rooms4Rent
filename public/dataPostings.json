@@ -51,7 +51,7 @@
     "image": "http://dummyimage.com/106x100.png/dddddd/000000",
     "price": 53,
     "availabity": true,
-    "address": "473 Sundown Plaza"
+    "address": "Manhattan"
   },
   {
     "id": 7,
@@ -60,25 +60,25 @@
     "image": "http://dummyimage.com/123x100.png/5fa2dd/ffffff",
     "price": 77,
     "availabity": true,
-    "address": "53 Corben Terrace"
+    "address": "Queens"
   },
   {
     "id": 8,
-    "title": "Dr",
+    "title": "Classic Building",
     "description": "Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum.",
     "image": "http://dummyimage.com/224x100.png/cc0000/ffffff",
     "price": 100,
     "availabity": false,
-    "address": "2 Novick Point"
+    "address": "Manhattan"
   },
   {
     "id": 9,
-    "title": "Rev",
+    "title": "One-Bedroom Apartment",
     "description": "Aenean fermentum.",
     "image": "http://dummyimage.com/177x100.png/dddddd/000000",
     "price": 32,
     "availabity": false,
-    "address": "77 Goodland Center"
+    "address": "Brooklyn"
   },
   {
     "id": 10,
@@ -96,7 +96,7 @@
     "image": "http://dummyimage.com/138x100.png/dddddd/000000",
     "price": 6,
     "availabity": true,
-    "address": "1 Pearson Lane"
+    "address": "Queens"
   },
   {
     "id": 12,
@@ -109,12 +109,12 @@
   },
   {
     "id": 13,
-    "title": "Ms",
+    "title": "Luxury One Bedroom",
     "description": "Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
     "image": "http://dummyimage.com/225x100.png/ff4444/ffffff",
     "price": 77,
     "availabity": false,
-    "address": "31150 Nevada Road"
+    "address": "Williamsburgh"
   },
   {
     "id": 14,
@@ -123,7 +123,7 @@
     "image": "http://dummyimage.com/176x100.png/dddddd/000000",
     "price": 11,
     "availabity": false,
-    "address": "3 Bayside Way"
+    "address": "Green point"
   },
   {
     "id": 15,
@@ -145,12 +145,12 @@
   },
   {
     "id": 17,
-    "title": "Rev",
+    "title": "Four-Bedroom Apartment",
     "description": "Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
     "image": "http://dummyimage.com/176x100.png/cc0000/ffffff",
     "price": 30,
     "availabity": false,
-    "address": "226 Vernon Pass"
+    "address": "Brooklyn"
   },
   {
     "id": 18,
@@ -163,12 +163,12 @@
   },
   {
     "id": 19,
-    "title": "Ms",
+    "title": "Two-Bedroom Apartment",
     "description": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
     "image": "http://dummyimage.com/117x100.png/dddddd/000000",
     "price": 52,
     "availabity": false,
-    "address": "2911 Sunnyside Terrace"
+    "address": "Brooklyn"
   },
   {
     "id": 20,

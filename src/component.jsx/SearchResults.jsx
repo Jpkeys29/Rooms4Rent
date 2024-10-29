@@ -17,6 +17,7 @@ const SearchResults = () => {
   const area_short_name = searchParams.get("area_short_name") // e.g., ?myParam=value
   const area_long_name = searchParams.get("area_long_name") // e.g., ?myParam=value
   console.log(area_long_name, area_short_name)
+  
   useEffect(() => {
     const fetchPosting = async () => {
       try {
@@ -25,15 +26,16 @@ const SearchResults = () => {
           throw new Error("Response was not ok")
         }
         const jsonData = await response.json()
-        console.log(jsonData)
+        // console.log(jsonData)
         // filter data based on search query parameters
+        console.log("Short name:", area_short_name)
+        console.log("Long name:", area_long_name)
         let jsonDataFiltered = jsonData.filter(
           (item) =>
-            item.address
-              .toLowerCase()
-              .includes(area_short_name.toLowerCase()) ||
+            item.address.toLowerCase().includes(area_short_name.toLowerCase()) ||
             item.address.toLowerCase().includes(area_long_name.toLowerCase())
         )
+        console.log(jsonDataFiltered)
         setPosting(jsonDataFiltered)
       } catch (error) {
         console.log("Error fetching the data:", error)
