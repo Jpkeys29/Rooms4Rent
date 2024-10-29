@@ -46,13 +46,13 @@ const PostRoom = () => {
             p: 2,
         }}>
             <Card sx={{ width: 600, p:3 }}>
-                <CardHeader>
+                <CardHeader
                     title={
-                        <Typography variant="h4" color="textPrimary" align="center">
-                            Post a room
+                        <Typography variant="h5" color="textPrimary" align="center">
+                            Post a Room
                         </Typography>
                     }
-                </CardHeader>
+                />
                 <CardContent component="form" >
                     <FormControl fullWidth margin="normal">
                         <FormLabel>Area</FormLabel>
