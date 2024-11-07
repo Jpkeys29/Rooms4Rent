@@ -15,6 +15,12 @@ import SignIn from "./component.jsx/SignIn"
 import SignUp from "./component.jsx/SignUp"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import PostRoom from "./component.jsx/PostRoom"
+import { Toolbar } from "@mui/material"
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
+import SvgIcon from '@mui/material/SvgIcon';
+import Button from "@mui/material/Button";
+
 
 function App() {
   console.log("auth", auth.currentUser)
@@ -32,31 +38,21 @@ function App() {
 
   return (
     <div>
-      <header style={{ backgroundColor: "#f8f9fa", height: "100px" }}>
-        <h1 style={{ textAlign: "center" }}>Rommye</h1>
-        <nav>
-          <ul
-            style={{
-              listStyleType: "none",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
-            <li>
-              <Link to={"/post"}>Post a room</Link>{" "}
-            </li>
-            <li>
-              <Link to={"/account"}>Account</Link>{" "}
-            </li>
-            <li>
-              <Link to={"/"}>Home</Link>{" "}
-            </li>
-            <li>
-              <Link onClick={handleLogOut} to={'/'}>Log Out</Link>{" "}
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <Box sx={{ display: 'flex' }}>
+        <AppBar position="static" sx={{ backgroundColor: 'transparent' }} >
+          <Toolbar >
+            <Typography variant="h4" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#141414' }} >
+              Roomye
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2 }} >
+              <Link to={"/"} style={{ color:"#212529", textDecoration:"none"}} >Home</Link>{" "}
+              <Link to={"/post"} style={{ color:"#212529", textDecoration:"none"}}>Post a room</Link>{" "}
+              <Link to={"/account"} style={{ color:"#212529", textDecoration:"none"}}>Account</Link>{" "}
+              <Link onClick={handleLogOut} to={'/'} style={{ color:"#212529", textDecoration:"none"}}>Log Out</Link>{" "}
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -70,7 +66,7 @@ function App() {
                 <Account />
               ) : (
                 <>
-                  <SignIn setUser={setUser}/>
+                  <SignIn setUser={setUser} />
                   {/* <SignUp setUser={setUser}/> */}
                 </>
               )
