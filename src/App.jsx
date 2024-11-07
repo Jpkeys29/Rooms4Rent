@@ -20,6 +20,7 @@ import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
 import SvgIcon from '@mui/material/SvgIcon';
 import Button from "@mui/material/Button";
+import HouseIcon from '@mui/icons-material/House';
 
 
 function App() {
@@ -41,14 +42,17 @@ function App() {
       <Box sx={{ display: 'flex' }}>
         <AppBar position="static" sx={{ backgroundColor: 'transparent' }} >
           <Toolbar >
-            <Typography variant="h4" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#141414' }} >
-              Roomye
+            <Typography>
+              <HouseIcon sx={{ color: "black", fontSize: "50px"}} />
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2 }} >
-              <Link to={"/"} style={{ color:"#212529", textDecoration:"none"}} >Home</Link>{" "}
-              <Link to={"/post"} style={{ color:"#212529", textDecoration:"none"}}>Post a room</Link>{" "}
-              <Link to={"/account"} style={{ color:"#212529", textDecoration:"none"}}>Account</Link>{" "}
-              <Link onClick={handleLogOut} to={'/'} style={{ color:"#212529", textDecoration:"none"}}>Log Out</Link>{" "}
+            <Typography variant="h4" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#212529', }} >
+              Roomye
+            </Typography >
+            <Box sx={{ display: 'flex', gap: 2 }} >  
+              <Link to={"/"} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}} >Home</Link>{" "}
+              <Link to={"/post"} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}}>Post a room</Link>{" "}
+              <Link to={"/account"} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}}>Account</Link>{" "}
+              <Link onClick={handleLogOut} to={'/'} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}}>Log Out</Link>{" "}
             </Box>
           </Toolbar>
         </AppBar>
