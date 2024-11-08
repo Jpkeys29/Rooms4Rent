@@ -56,10 +56,10 @@ function SearchBar() {
             style={{
               boxSizing: "border-box",
               border: "1px solid transparent",
-              width: "60%",
+              width: "40%",
               height: "60px",
               padding: "0 12px",
-              borderRadius: "3px",
+              borderRadius: "5px",
               boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
               fontSize: "14px",
               outline: "none",
@@ -70,9 +70,9 @@ function SearchBar() {
         </StandaloneSearchBox>
       )}
       <Button
-        variant="outlined"
+        variant="contained"
         size="large"
-        sx={{ marginTop: "15px" }}
+        sx={{ marginTop: "15px", backgroundColor:"#243156", textTransform:"none" }}
         onClick={handleSearch}
       >
         Search

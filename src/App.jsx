@@ -21,11 +21,29 @@ import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
 import SvgIcon from '@mui/material/SvgIcon';
 import Button from "@mui/material/Button";
 import HouseIcon from '@mui/icons-material/House';
+import client from "./sanityClient";
+import RenderedAccount from "./component.jsx/renderedAccount";
 
 
 function App() {
-  console.log("auth", auth.currentUser)
+  console.log(auth?.currentUser?.uid)
   const [user, setUser] = useState(null)
+  const [userDetails, setUserDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      console.log(auth?.currentUser?.uid)
+      let userId = auth?.currentUser?.uid;
+      if (userId) {
+        const userdetails = await client.getDocument(userId)
+        console.log(userdetails);
+        setUserDetails(userdetails)
+      }
+
+    }
+    fetchUserDetails();
+  }, [auth, auth?.currentUser])
+
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -43,16 +61,16 @@ function App() {
         <AppBar position="static" sx={{ backgroundColor: 'transparent' }} >
           <Toolbar >
             <Typography>
-              <HouseIcon sx={{ color: "black", fontSize: "50px"}} />
+              <HouseIcon sx={{ color: "black", fontSize: "50px" }} />
             </Typography>
             <Typography variant="h4" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#212529', }} >
               Roomye
             </Typography >
-            <Box sx={{ display: 'flex', gap: 2 }} >  
-              <Link to={"/"} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}} >Home</Link>{" "}
-              <Link to={"/post"} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}}>Post a room</Link>{" "}
-              <Link to={"/account"} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}}>Account</Link>{" "}
-              <Link onClick={handleLogOut} to={'/'} style={{ color:"#212529", textDecoration:"none", fontFamily: 'Arial, sans-serif'}}>Log Out</Link>{" "}
+            <Box sx={{ display: 'flex', gap: 2 }} >
+              <Link to={"/"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }} >Home</Link>{" "}
+              <Link to={"/post"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }}>Post a room</Link>{" "}
+              <Link to={"/account"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }}>Account</Link>{" "}
+              <Link onClick={handleLogOut} to={'/'} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }}>Log Out</Link>{" "}
             </Box>
           </Toolbar>
         </AppBar>
@@ -67,7 +85,7 @@ function App() {
             path="account"
             element={
               user ? (
-                <Account />
+                userDetails? < RenderedAccount userDetails={userDetails} /> : <Account />
               ) : (
                 <>
                   <SignIn setUser={setUser} />

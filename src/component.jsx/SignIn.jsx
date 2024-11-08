@@ -19,6 +19,8 @@ import { auth } from "../firebase/config"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
+
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -65,6 +67,8 @@ export default function SignIn({ setUser }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("")
   const [open, setOpen] = React.useState(false)
 
+  const navigate = useNavigate()
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -88,6 +92,7 @@ export default function SignIn({ setUser }) {
         const user = userCredential.user
         console.log("user", user)
         setUser(user)
+      navigate("/")
       })
       .catch((error) => {
         const errorCode = error.code
@@ -133,6 +138,7 @@ export default function SignIn({ setUser }) {
       }).catch(error => {
         console.log('Error:', error)
       })
+      navigate("/")
   }
 
   return (
@@ -142,7 +148,7 @@ export default function SignIn({ setUser }) {
         <Typography
           component="h1"
           variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)", textAlign:"center" }}
+          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)", textAlign: "center" }}
         >
           Sign in
         </Typography>
@@ -212,13 +218,14 @@ export default function SignIn({ setUser }) {
             fullWidth
             variant="contained"
             onClick={validateInputs}
+            sx={{ backgroundColor: "#243156" }}
           >
             Sign in
           </Button>
           <Typography sx={{ textAlign: "center" }}>
             Don&apos;t have an account?{" "}
             <span>
-            <Link component={RouterLink} to={"/signup"}>Sign up </Link>{" "}
+              <Link component={RouterLink} to={"/signup"}>Sign up </Link>{" "}
             </span>
           </Typography>
         </Box>
@@ -230,6 +237,7 @@ export default function SignIn({ setUser }) {
             variant="outlined"
             onClick={() => handleGoogleSignIn()}
             startIcon={<GoogleIcon />}
+            sx={{ backgroundColor: "#243156" }}
           >
             Sign in with Google
           </Button>

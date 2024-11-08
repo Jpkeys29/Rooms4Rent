@@ -13,9 +13,10 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import FormControl from "@mui/material/FormControl"
 import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
-// import client from "../sanityClient";
+import client from "../sanityClient";
 import { auth } from "../firebase/config"
 import axios from "axios";
+import { Buffer } from 'buffer';
 
 const Account = () => {
   const [userProfile, setUserProfile] = useState({
@@ -54,11 +55,30 @@ const Account = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const uploadImageToSanity = async (base64String, fileName = 'image.png') => {
+    try{
+      // const file = Buffer.from(base64String, 'base64')  // Convert base64 string to file const 
+      const response = await client.assets.upload('image', base64String, { 
+        contentType: "png",filename: fileName    // Specify the filename for the uploaded image(passing file to sanity)
+        });
+        return response 
+    } catch (error) { console.error('Image upload failed:', error.message); throw error; }
+  }
+
+  const handleSubmit = async(e) => {
     e.preventDefault()
     console.log(userProfile,auth.currentUser.uid)
-      client.createOrReplace({_id:auth.currentUser.uid , _type:"accountdetails",name:userProfile.name, email:userProfile.email, gender:userProfile.gender, occupation:userProfile.occupation})
-
+    let image_upload_response = await uploadImageToSanity(userProfile.photo)
+    console.log("image_upload_response", image_upload_response)
+      await client.createOrReplace({_id:auth.currentUser.uid , _type:"accountdetails",id: auth.currentUser.uid, name:userProfile.name, email:userProfile.email, gender:userProfile.gender, occupation:userProfile.occupation,
+      image: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: image_upload_response._id
+        }}
+    })
+    window.location.reload();  //refreshing page 
   }
 
   const handleChange = (e) => {
@@ -80,7 +100,7 @@ const Account = () => {
       reader.onloadend = () => {
         setUserProfile((prev) => ({
           ...prev,
-          photo: reader.result,
+          photo: file,
         }))
       }
       reader.readAsDataURL(file)

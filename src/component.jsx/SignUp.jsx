@@ -22,6 +22,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth"
+import { useNavigate } from "react-router-dom"
 // import AppTheme from "../shared-theme/AppTheme"
 // import ColorModeSelect from "../shared-theme/ColorModeSelect"
 
@@ -70,6 +71,8 @@ export default function SignUp({ setUser }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("")
   const [open, setOpen] = React.useState(false)
 
+  const navigate = useNavigate()
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -94,6 +97,7 @@ export default function SignUp({ setUser }) {
         console.log("user", user)
         setUser(user)
       })
+    navigate('/')
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
@@ -137,6 +141,7 @@ export default function SignUp({ setUser }) {
       .catch((error) => {
         console.log(error)
       })
+      navigate('/') 
   }
 
   return (
@@ -215,6 +220,7 @@ export default function SignUp({ setUser }) {
             fullWidth
             variant="contained"
             onClick={validateInputs}
+            sx={{backgroundColor: "#243156"}}
           >
             Register
           </Button>
@@ -229,6 +235,7 @@ export default function SignUp({ setUser }) {
             variant="outlined"
             onClick={() => handleGoogleSignUp()}
             startIcon={<GoogleIcon />}
+            sx={{backgroundColor: "#243156"}}
           >
             Sign Up with Google
           </Button>
