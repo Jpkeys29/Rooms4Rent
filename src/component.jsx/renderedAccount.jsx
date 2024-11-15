@@ -15,8 +15,8 @@ const RenderedAccount = ({ userDetails }) => {
     const urlFor = (source) => {
         return builder.image(source)
     }
-
 console.log(urlFor(userDetails.image))
+
     return (
         <Card sx={{ maxWidth: 550, margin: 'auto', boxShadow: 3, borderRadius: 2, p: 4 }}>
             <CardHeader title="My Account"
@@ -27,12 +27,18 @@ console.log(urlFor(userDetails.image))
                 height="140"
                 image={ urlFor(userDetails.image)}
                 alt='profile image'
+                sx={{
+                    width: 130,
+                    height: 130,
+                    margin: 'auto',
+                    borderRadius: '50%'
+                }}
             />
             <CardContent>
-                <Typography variant="h6" component="div" gutterBottom>
-                    {userDetails.name}
+                <Typography variant="h6" color="text.secondary" gutterBottom>
+                    Name: {userDetails.name}
                 </Typography>
-                <Typography variant="h6" component="div" gutterBottom>
+                <Typography variant="h6" color="text.secondary" gutterBottom>
                     Email: {userDetails.email}
                 </Typography>
                 <Typography variant="h6" color="text.secondary">
@@ -40,6 +46,9 @@ console.log(urlFor(userDetails.image))
                 </Typography>
                 <Typography variant="h6" color="text.secondary">
                     Occupation: {userDetails.occupation}
+                </Typography>
+                <Typography variant='h3'>
+                    MY POSTINGS???
                 </Typography>
             </CardContent>
         </Card>

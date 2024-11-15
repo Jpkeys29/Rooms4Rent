@@ -30,7 +30,6 @@ const PostRoom = () => {
 
   const uploadImageToSanity = async (base64String, fileName = "image.png") => {
     try {
-      // const file = Buffer.from(base64String, 'base64')  // Convert base64 string to file const
       const response = await client.assets.upload("image", base64String, {
         contentType: "png",
         filename: fileName, // Specify the filename for the uploaded image(passing file to sanity)
@@ -46,7 +45,6 @@ const PostRoom = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     let images = []
-
     for (const pic of roomPosting.photo) {
       const image_upload_response = await uploadImageToSanity(pic)
       let image = {
@@ -80,26 +78,6 @@ const PostRoom = () => {
     setRoomPosting({ ...roomPosting, [name]: value })
   }
 
-  const addRoomPosting = async (roomPosting) => {
-    try {
-      const response = await fetch("URL", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json ; charset=UTF-8",
-        },
-        body: JSON.stringify(roomPosting),
-      })
-
-      if (response.ok) {
-        const jsonResponse = await response.json()
-        const data = await jsonResponse
-        setRoomPosting(data)
-      }
-    } catch (error) {
-      console.log("Error:", error)
-    }
-  }
-
   const handleUploadPhoto = (e) => {
     const fileReaders = []
     const files = e.target.files
@@ -112,9 +90,6 @@ const PostRoom = () => {
 
         reader.onloadend = () => {
           setPhotoArray([...photosArray, file])
-
-          // Check if all files have been processed
-          //   if (photosArray.length === files.length) {
           console.log("photosArray", photosArray)
           setRoomPosting((prev) => ({
             ...prev,
@@ -122,11 +97,24 @@ const PostRoom = () => {
           }))
           //   }
         }
-
         reader.readAsDataURL(file)
       })
     }
   }
+
+  // const createPostingWithReference = async (userId, roomPosting) => {
+  //   await client.create({
+  //     _type: 'posting',
+  //     area: roomPosting.area,
+  //     neighborhood: roomPosting.neighborhood,
+  //     description: roomPosting.description,
+  //     price: roomPosting.price,
+  //     account: {
+  //       _type: 'reference',
+  //       _ref: userId
+  //     }
+  //   });
+  // };
 
   return (
     <Box
@@ -139,7 +127,7 @@ const PostRoom = () => {
         p: 2,
       }}
     >
-      <Card sx={{ width: 550, p: 3 }}>
+      <Card sx={{ width: 500, p: 3 }}>
         <CardHeader
           title={
             <Typography variant="h5" color="textPrimary" align="center">
@@ -149,7 +137,7 @@ const PostRoom = () => {
         />
         <CardContent component="form">
           <FormControl fullWidth margin="normal">
-            <FormLabel>Area</FormLabel>
+            <FormLabel>Area(Manhattan, Brooklyn, Queens) </FormLabel>
             <TextField
               name="area"
               value={roomPosting.area}
@@ -188,22 +176,7 @@ const PostRoom = () => {
           </FormControl>
           <FormControl>
             <FormLabel>Photos</FormLabel>
-            {/* {roomPosting.photo && roomPosting.photo[0] ? (
-                            roomPosting.photo.map((p, i) => {
-                                return (
-                                    <img
-                                        src={p}
-                                        alt="Uploaded Preview"
-                                        style={{ width: 70, height: 60,  }}
-                                    />
-                                )
-                            })
-                        ) : (
-                            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                        )} */}
-            {roomPosting.photo &&
-              roomPosting.photo[0] &&
-              roomPosting.photo.map((p, i) => (
+            {roomPosting.photo && roomPosting.photo[0] && roomPosting.photo.map((p, i) => (
                 <img
                   src={p}
                   alt="Uploaded Preview"
