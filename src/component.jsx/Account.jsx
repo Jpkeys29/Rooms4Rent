@@ -30,34 +30,8 @@ const Account = () => {
 
   const navigate = useNavigate()
 
-  const addAccount = async (userProfile) => {
-    try {
-      const response = await fetch("URL", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json ; charset=UTF-8",
-        },
-        body: JSON.stringify(userProfile),
-      })
-      console.log("FROM REACT:", response)
-      if (response.status === 201) {
-        alert("Profile created, Yay!")
-          .then((response) => response.json())
-          .then((data) => {
-            setUserProfile(data)
-          })
-        navigate("/account")
-      } else {
-        console.error("No dashboard for you")
-      }
-    } catch (error) {
-      console.log("Error:", error)
-    }
-  }
-
   const uploadImageToSanity = async (base64String, fileName = 'image.png') => {
     try{
-      // const file = Buffer.from(base64String, 'base64')  // Convert base64 string to file const 
       const response = await client.assets.upload('image', base64String, { 
         contentType: "png",filename: fileName    // Specify the filename for the uploaded image(passing file to sanity)
         });
@@ -106,7 +80,9 @@ const Account = () => {
       reader.readAsDataURL(file)
     }
   }
+  
   console.log("userProfile", userProfile)
+
   return (
     <Box
       sx={{

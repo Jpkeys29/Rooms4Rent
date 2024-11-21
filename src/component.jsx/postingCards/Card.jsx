@@ -4,7 +4,6 @@ import { CardMedia } from '@mui/material'
 import Typography from '@material-ui/core/Typography'
 import { Container, Image, Badge } from './Cardstyles'
 import { Box } from '@material-ui/core'
-// import { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
 import imageUrlBuilder from '@sanity/image-url'
 import client from '../../sanityClient'
 
@@ -16,24 +15,25 @@ function CardPosting({posting}) {
 
   return (
     <Container  >
-      <CardActionArea >
-        {/* <Image src="https://bit.ly/2Z4KKcF" alt="property" /> */}
+      <CardActionArea  >
+        {posting && posting.images && posting.images.length !== 0 &&
         <CardMedia
         component="img"
-        image={ urlFor(posting.images[0])}
-        />
+        image={ urlFor(posting?.images[0])}
+        /> 
+        }
         <CardContent>
           <Typography variant="subtitle2">
             {/* <Badge>NEW</Badge> 3 BEDS &bull; 2 BATHS */}
           </Typography>
           <Typography gutterBottom variant="h6" component="h2" noWrap>
-            {posting.description}
+            {posting?.description}
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            {posting.neighborhood}({posting.area})
+            {posting?.neighborhood}({posting?.area})
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
-            ${posting.price}
+            ${posting?.price}
           </Typography>
         </CardContent>
       </CardActionArea>

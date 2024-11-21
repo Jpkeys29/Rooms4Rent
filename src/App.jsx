@@ -23,7 +23,8 @@ import Button from "@mui/material/Button";
 import HouseIcon from '@mui/icons-material/House';
 import client from "./sanityClient";
 import RenderedAccount from "./component.jsx/renderedAccount";
-
+import RenderedPosting from "./component.jsx/renderedPosting"
+import PostDetails from "./component.jsx/PostDetails"
 
 function App() {
   console.log(auth?.currentUser?.uid)
@@ -32,14 +33,13 @@ function App() {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      console.log(auth?.currentUser?.uid)
+      // console.log(auth?.currentUser?.uid)
       let userId = auth?.currentUser?.uid;
       if (userId) {
         const userdetails = await client.getDocument(userId)
         console.log(userdetails);
         setUserDetails(userdetails)
       }
-
     }
     fetchUserDetails();
   }, [auth, auth?.currentUser])
@@ -58,16 +58,24 @@ function App() {
   return (
     <div>
       <Box sx={{ display: 'flex' }}>
-        <AppBar position="static" sx={{ backgroundColor: 'transparent' }} >
+        <AppBar position="static" sx={{ backgroundColor: 'transparent', height:"75px", top:0, position:"static" }} >
           <Toolbar >
-            <Typography>
+            <Box 
+            display="flex"
+            alignItems="center"
+            sx={{ flexGrow: 1}}
+             >
+            <Link to={"/"} style={{ textDecoration:"none", color:"inherit", display: "flex", alignItems: "center"}}>
+            <Typography >
               <HouseIcon sx={{ color: "black", fontSize: "50px" }} />
             </Typography>
-            <Typography variant="h4" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, color: '#212529', }} >
+            <Typography variant="h4" color="black">
               Roomye
             </Typography >
-            <Box sx={{ display: 'flex', gap: 2 }} >
-              <Link to={"/"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }} >Home</Link>{" "}
+            </Link>
+            </Box>
+            <Box sx={{ display: 'flex', gap: 3, justifyContent:'space-between', fontSize:'20px', paddingRight:"30px"}} >
+              {/* <Link to={"/"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }} >Home</Link>{" "} */}
               <Link to={"/post"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }}>Post a room</Link>{" "}
               <Link to={"/account"} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }}>Account</Link>{" "}
               <Link onClick={handleLogOut} to={'/'} style={{ color: "#212529", textDecoration: "none", fontFamily: 'Arial, sans-serif' }}>Log Out</Link>{" "}
@@ -81,6 +89,7 @@ function App() {
           <Route path="searchbar" element={<SearchBar />} />
           <Route path="searchresults" element={<SearchResults />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="postdetails/:id" element={<PostDetails/>}/>
           <Route
             path="account"
             element={
@@ -89,7 +98,6 @@ function App() {
               ) : (
                 <>
                   <SignIn setUser={setUser} />
-                  {/* <SignUp setUser={setUser}/> */}
                 </>
               )
             }
@@ -97,8 +105,12 @@ function App() {
           <Route
             path="post"
             element={user ?
-              <PostRoom /> :
+              <>   
+                <RenderedPosting/> <PostRoom /> 
+              </> 
+              :
               <><SignIn />
+              
                 {/* <SignUp /> */}
               </>
             } />
