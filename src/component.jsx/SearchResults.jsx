@@ -41,6 +41,7 @@ const SearchResults = () => {
         client.fetch(query).then((results) => {
           console.log("results", results, area_short_name);
           setPosting(results);
+          console.log(posting)
         });
       } catch (error) {
         console.log("Error fetching the data:", error);
@@ -52,16 +53,17 @@ const SearchResults = () => {
   return (
     <Box sx={{ width: "90%" }}>
       <Typography variant="h5" gutterBottom align="center">
-        Search Results{posting.neighborhood}
+        Search Results
       </Typography>
       <Grid container rowSpacing={4} columnSpacing={{ md: 4 }}>
         {posting.length === 0 ? (
           <p>Loading...</p>
         ) : (
           posting.map((p, index) => (
-            <Grid size={4}>
+            <Grid item xs={12} md={4} key={p._id}>
+              {console.log (JSON.stringify(p, null, 2))}
               <Link
-                key={index}
+              to={`/postdetails?_id=${p._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <CardPosting posting={p} />

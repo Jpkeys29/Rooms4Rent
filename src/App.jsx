@@ -89,7 +89,7 @@ function App() {
           <Route path="searchbar" element={<SearchBar />} />
           <Route path="searchresults" element={<SearchResults />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="postdetails/:id" element={<PostDetails/>}/>
+          <Route path="postdetails" element={<PostDetails/>}/>
           <Route
             path="account"
             element={
