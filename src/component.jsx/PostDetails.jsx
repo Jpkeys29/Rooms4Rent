@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import client from "../sanityClient";
 import { useState } from "react";
-import { Box, Card, CardContent, CardMedia, Container, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Container, Typography, Button } from "@mui/material";
 import imageUrlBuilder from '@sanity/image-url'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import Divider from '@mui/material/Divider';
@@ -16,18 +17,36 @@ export default function PostDetails() {
         return builder.image(source)
     }
   const _id = searchParams.get("_id");
-  const fetchSinglePosting = async () => {
-    let posting = await client.getDocument(_id);
-    setPostDetails(posting);
-    console.log("posting", posting, _id);
-  };
+
+  const navigate = useNavigate()
+  
   useEffect(() => {
+    const fetchSinglePosting = async () => {
+      let posting = await client.getDocument(_id);
+      setPostDetails(posting);
+      console.log("posting", posting, _id);
+    };
     fetchSinglePosting();
   }, []);
 
   const deletePosting = async (_id) => {
-    let postingdelete = client.delete(_id);
+    try {
+      // await client.delete(_id);
+      await fetch(`/api/posting/${_id}`, {
+        method: 'DELETE'
+      });
+      navigate('/');
+      console.log(`Posting with ID ${_id} deleted successfully.`);
+
+      const updatedPostDetails = {...postDetails};
+      delete updatedPostDetails[_id];
+
+      setPostDetails(updatedPostDetails);
+    } catch (error) {
+      console.log('Error deleting data:', error);
+    }  
   };
+
 
 
   return (
@@ -57,9 +76,9 @@ export default function PostDetails() {
           <Typography variant="body1" sx={{ color: 'text.secondary', mb: 1.5 }} component="p">
             {postDetails?.amenities}
           </Typography>
-          <Typography></Typography>
-
         </CardContent>
+        <Divider />
+        <Button sx={{ color: 'danger', mb: 1.5 }} onClick={() =>deletePosting(postDetails._id)}>Delete Posting</Button>
       </Card>
     </Container>
   );
