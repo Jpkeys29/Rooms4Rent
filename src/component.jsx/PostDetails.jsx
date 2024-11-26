@@ -31,33 +31,24 @@ export default function PostDetails() {
 
   const deletePosting = async (_id) => {
     try {
-      // await client.delete(_id);
-      await fetch(`/api/posting/${_id}`, {
-        method: 'DELETE'
-      });
+      await client.delete(_id);
       navigate('/');
       console.log(`Posting with ID ${_id} deleted successfully.`);
-
-      const updatedPostDetails = {...postDetails};
-      delete updatedPostDetails[_id];
-
-      setPostDetails(updatedPostDetails);
+      setPostDetails({});
     } catch (error) {
       console.log('Error deleting data:', error);
     }  
   };
 
-
-
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Card sx={{width: 500, maxWidth: 500, height: 500, marginTop: "25px"}}>
-        <CardMedia
+        {/* <CardMedia
         sx={{height: 190}}
-        />
+        /> */}
         <CardContent >
           PostDetails
-          <Typography variant="h6" component="h2" noWrap gutterBottom="true">
+          <Typography variant="h6" component="h2" noWrap >
             {postDetails?.description}
           </Typography>
           <Divider />
