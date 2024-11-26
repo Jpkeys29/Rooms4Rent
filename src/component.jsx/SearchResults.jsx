@@ -22,14 +22,14 @@ const SearchResults = () => {
   console.log("log in search results", area_long_name, area_short_name);
 
   function findCommonWords(str1, str2) {
-    // Split the strings into arrays of words
+    // Split strings into arrays of words
     const words1 = str1.toLowerCase().split(/\W+/);
     const words2 = str2.toLowerCase().split(/\W+/);
 
-    // Find the common words using a Set for faster lookups
+    // Find common words using a Set for faster lookups
     const commonWords = words1.filter((word) => words2.includes(word));
 
-    // Remove duplicates by converting the result to a Set and back to an array
+    // Remove duplicates by converting the result to a set and back to an array
     return [...new Set(commonWords)];
   }
 
