@@ -38,11 +38,9 @@ const SearchResults = () => {
       try {
         const query = `*[_type == "roomposting" && ("${area_short_name}" match area || "${area_long_name}" match neighborhood || "${area_long_name}" match area || "${area_short_name}" match neighborhood )]`;
 
-        client.fetch(query).then((results) => {
-          console.log("results", results, area_short_name);
-          setPosting(results);
-          console.log(posting)
-        });
+        const results = await client.fetch(query);
+        console.log("results", results);
+        setPosting(results);
       } catch (error) {
         console.log("Error fetching the data:", error);
       }
