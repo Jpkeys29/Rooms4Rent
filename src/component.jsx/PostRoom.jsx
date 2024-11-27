@@ -95,7 +95,6 @@ const PostRoom = () => {
             ...prev,
             photo: [...photosArray, file], // Set the state with the array of photos
           }));
-          //   }
         };
         reader.readAsDataURL(file);
       });
@@ -167,6 +166,7 @@ const PostRoom = () => {
               roomPosting.photo.map((p, i) => (
                 <img
                   src={p}
+                  loading="lazy"
                   alt="Uploaded Preview"
                   style={{ width: 70, height: 60 }}
                 />

@@ -20,13 +20,18 @@ function CardPosting({posting}) {
         <CardMedia
         component="img"
         image={ urlFor(posting?.images[0])}
+        loading='lazy'
+        width='500'
+        height='300'
+        sizes="(max-width: 600px) 100vw, (max-width: 1024) 50vw, 400px "
+        style={{ aspectRatio: '2/1'}}
         /> 
         }
         <CardContent>
           <Typography variant="subtitle2">
             {/* <Badge>NEW</Badge> 3 BEDS &bull; 2 BATHS */}
           </Typography>
-          <Typography gutterBottom variant="h6" component="h2" noWrap>
+          <Typography variant="h6" component="h2" noWrap>
             {posting?.description}
           </Typography>
           <Typography variant="body1" color="textSecondary" component="p">
