@@ -13,6 +13,8 @@ import { useSearchParams } from "react-router-dom";
 import client from "../sanityClient";
 import CardPosting from "./postingCards/Card";
 import { Link } from "react-router-dom";
+import { Container } from "@mui/material";
+// import PostDetails from "./PostDetails";
 
 const SearchResults = () => {
   const [posting, setPosting] = useState([]);
@@ -49,11 +51,21 @@ const SearchResults = () => {
   }, []);
 
   return (
-    <Box sx={{ width: "90%" }}>
+    <Container> 
       <Typography variant="h5" gutterBottom align="center">
         Search Results
       </Typography>
-      <Grid container rowSpacing={4} columnSpacing={{ md: 4 }}>
+      <Box
+      height="100vh"
+      padding={2}
+      >
+      <Grid
+       container
+       justifyContent='center'
+       alignItems="center"
+       rowSpacing={4}
+       columnSpacing={{ md: 4 }}
+      >
         {posting.length === 0 ? (
           <p>Loading...</p>
         ) : (
@@ -70,7 +82,8 @@ const SearchResults = () => {
           ))
         )}
       </Grid>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
