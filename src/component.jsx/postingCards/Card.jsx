@@ -10,21 +10,18 @@ import client from '../../sanityClient'
 function CardPosting({posting}) {
     const builder = imageUrlBuilder(client)
     const urlFor = (source) => {
-        return builder.image(source)
+        return builder.image(source).url()
     }
 
   return (
-    <Container  >
+    <Container>
       <CardActionArea  >
         {posting && posting.images && posting.images.length !== 0 &&
         <CardMedia
         component="img"
         image={ urlFor(posting?.images[0])}
         loading='lazy'
-        width='500'
-        height='300'
-        sizes="(max-width: 600px) 100vw, (max-width: 1024) 50vw, 400px "
-        style={{ aspectRatio: '2/1'}}
+        style={{ aspectRatio: '3/2'}}
         /> 
         }
         <CardContent>

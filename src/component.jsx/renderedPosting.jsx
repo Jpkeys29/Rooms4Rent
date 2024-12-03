@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { CardMedia } from "@mui/material";
+import { CardMedia, Container } from "@mui/material";
 import CardHeader from "@mui/material/CardHeader";
 import imageUrlBuilder from "@sanity/image-url";
 import client from "../sanityClient";
@@ -23,7 +23,7 @@ function RenderedPosting() {
         const query = '*[_type == "roomposting" && id == $userId]';
         const params = { userId: userId };
         const postsByAccount = await client.fetch(query, params);
-        console.log(postsByAccount);
+        // console.log(postsByAccount);
         setPostingDetails(postsByAccount);
       }
     };
@@ -50,23 +50,20 @@ function RenderedPosting() {
         <Typography variant="h5" gutterBottom align="center">
           My Postings
         </Typography>
-        {/* {postingDetails.map((p, index) => {
-          return <CardPosting posting={p} key={index} />;
-        })} */}
-        <Grid container rowSpacing={4} columnSpacing={{ md: 4 }}>
+        <Container >
           {postingDetails.map((p, index) => (
-            <Grid size={4}>
+            <Grid size={4} key={index}>
               <Box
                 key={index}
                 component={Link}
                 sx={{ textDecoration: "none", color: "inherit" }}
-                to={`/postdetails/${p.id}`}
+                to={`/postdetails?_id=${p._id}`}
               >
                 <CardPosting posting={p} />
               </Box>
             </Grid>
           ))}
-        </Grid>
+        </Container>
       </Box>
     </Box>
   );
