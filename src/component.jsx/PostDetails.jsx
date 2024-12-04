@@ -24,7 +24,7 @@ export default function PostDetails() {
 
   const builder = imageUrlBuilder(client);
   const urlFor = (source) => {
-    return builder.image(source);
+    return builder.image(source).url();
   };
   const _id = searchParams.get("_id");
 
@@ -58,10 +58,9 @@ export default function PostDetails() {
       console.log(
         `Posting with _id ${_id} updated successfully.`,
         updatedPosting
-        
       );
       setPostDetails(updatedPosting);
-      setNewDescription('');
+      setNewDescription("");
     } catch (error) {
       console.log("Error", error);
     }
@@ -69,7 +68,6 @@ export default function PostDetails() {
 
   const onNewDescription = (e) => {
     setNewDescription(e.target.value);
-
   };
 
   console.log(postDetails?.images);
@@ -78,14 +76,19 @@ export default function PostDetails() {
     <Container
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <Card sx={{ width: 500, maxWidth: 600, height: 600, marginTop: "25px" }}>
-        <CardMedia
-          sx={{ height: 190 }}
-          image={ 
-            postDetails?.images?.[0]?.asset && urlFor(postDetails.images[0].asset)
-            // urlFor(postDetails?.images[0])
-          }
-        />
+      <Card
+       sx={{ width: 500, maxWidth: 600, height: 600, marginTop: "25px" }}>
+        <Box>
+          {postDetails?.images?.map((image, index) => ( 
+            <CardMedia
+            key={image._key || index}
+            sx={{ height: 190 }}
+            image={ 
+              image?.asset && urlFor(image.asset) 
+            }
+            />
+            ))}
+        </Box>
         <CardContent>
           PostDetails
           <Typography variant="h6" component="h2" noWrap>
