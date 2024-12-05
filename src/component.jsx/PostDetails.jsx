@@ -77,8 +77,13 @@ export default function PostDetails() {
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <Card
-       sx={{ width: 500, maxWidth: 600, height: 600, marginTop: "25px" }}>
-        <Box>
+       sx={{ width: 500, maxWidth: 600, height: 600, marginTop: "25px" }}
+      >
+        <CardMedia 
+        sx={{ height: 190 }}
+        image={postDetails?.images?.[0].asset && urlFor(postDetails.images[0].asset)}
+        />
+        {/* <Box>
           {postDetails?.images?.map((image, index) => ( 
             <CardMedia
             key={image._key || index}
@@ -88,7 +93,7 @@ export default function PostDetails() {
             }
             />
             ))}
-        </Box>
+        </Box> */}
         <CardContent>
           PostDetails
           <Typography variant="h6" component="h2" noWrap>
