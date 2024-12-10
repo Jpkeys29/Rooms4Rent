@@ -16,10 +16,12 @@ import TextField from "@mui/material/TextField";
 import imageUrlBuilder from "@sanity/image-url";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from "@mui/material/Divider";
+import ContactForm from "./ContactForm";
 
 export default function PostDetails() {
   const [postDetails, setPostDetails] = useState(null);
   const [newDescription, setNewDescription] = useState("");
+  const [editMode, setEditMode ] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const builder = imageUrlBuilder(client);
@@ -80,6 +82,7 @@ export default function PostDetails() {
        sx={{ width: 500, maxWidth: 600, height: 600, marginTop: "25px" }}
       >
         <CardMedia 
+        component='img'
         sx={{ height: 190 }}
         image={postDetails?.images?.[0].asset && urlFor(postDetails.images[0].asset)}
         />
@@ -96,14 +99,24 @@ export default function PostDetails() {
         </Box> */}
         <CardContent>
           PostDetails
+          <Button onClick={(e) => setEditMode(!editMode)}
+          
+          >Edit</Button>
+          {!editMode && 
           <Typography variant="h6" component="h2" noWrap>
             {postDetails?.description}
           </Typography>
+          
+          }
+
+          {editMode && 
+          <>
           <TextField
             name="description"
             value={newDescription.description}
             onChange={onNewDescription}
-          />
+            />
+          
           <Button
             onClick={() =>
               updatePosting({
@@ -112,9 +125,14 @@ export default function PostDetails() {
               })
             }
             disabled={!postDetails}
-          >
+            >
             Update
           </Button>
+            </>
+          }
+
+          
+
           <Divider />
           <Typography
             variant="body1"
@@ -147,9 +165,11 @@ export default function PostDetails() {
           >
             {postDetails?.amenities}
           </Typography>
+
+        <ContactForm/>
+
         </CardContent>
         <Divider />
-
         <Button
           sx={{ color: "error.main", mb: 1.5 }}
           onClick={() => deletePosting(postDetails._id)}
