@@ -31,22 +31,25 @@ function RenderedPosting() {
   }, [auth, auth?.currentUser]);
   return (
     <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-        alignItems: "center",
-        height: "100vh",
-        gap: "16px",
-        backgroundPosition: "center top",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        height: "50%",
-        padding: 3,
-      }}
+    sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      // sx={{
+      //   display: "flex",
+      //   justifyContent: "center",
+      //   flexDirection: "row",
+      //   alignItems: "center",
+      //   height: "100vh",
+      //   gap: "16px",
+      //   backgroundPosition: "center top",
+      //   backgroundSize: "cover",
+      //   backgroundRepeat: "no-repeat",
+      //   height: "50%",
+      //   padding: 3,
+      // }}
     >
       
-      <Box sx={{ width: "90%" }}>
+      <Box 
+      // sx={{ width: "90%" }}
+      >
         <Typography variant="h5" gutterBottom align="center">
           My Postings
         </Typography>
