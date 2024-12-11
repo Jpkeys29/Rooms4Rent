@@ -65,6 +65,7 @@ const SearchResults = () => {
        alignItems="center"
        rowSpacing={4}
        columnSpacing={{ md: 4 }}
+       xs={12} sm={6} md={4}
       >
         {posting.length === 0 ? (
           <p>Loading...</p>

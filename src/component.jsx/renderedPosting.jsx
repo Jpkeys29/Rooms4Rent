@@ -47,26 +47,29 @@ function RenderedPosting() {
       // }}
     >
       
-      <Box 
-      // sx={{ width: "90%" }}
-      >
-        <Typography variant="h5" gutterBottom align="center">
+      <Box >
+        <Typography variant="h5" gutterBottom align="center" paddingTop={2}>
           My Postings
         </Typography>
-        <Container >
-          {postingDetails.map((p, index) => (
-            <Grid size={4} key={index}>
-              <Box
-                key={index}
-                component={Link}
-                sx={{ textDecoration: "none", color: "inherit" }}
-                to={`/postdetails?_id=${p._id}`}
+        <Box
+        paddingTop={2}
+        minHeight="45vh"
+        >
+        <Grid container spacing={2} justifyContent="center">
+        {postingDetails.map((p, index) => (
+          <Grid size={4} key={index}  xs={12} sm={6} md={4} >
+            <Box
+              key={index}
+              component={Link}
+              sx={{ textDecoration: "none", color: "inherit" }}
+              to={`/postdetails?_id=${p._id}`}
               >
-                <CardPosting posting={p} />
-              </Box>
-            </Grid>
-          ))}
-        </Container>
+              <CardPosting posting={p} />
+            </Box>
+          </Grid>
+        ))}
+        </Grid>
+        </Box>
       </Box>
     </Box>
   );
