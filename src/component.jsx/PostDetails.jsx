@@ -17,6 +17,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from "@mui/material/Divider";
 import ContactForm from "./ContactForm";
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function PostDetails() {
   const [postDetails, setPostDetails] = useState(null);
@@ -62,17 +63,18 @@ export default function PostDetails() {
         updatedPosting
       );
       setPostDetails(updatedPosting);
-      setNewDescription("");
+      navigate('/post')
     } catch (error) {
       console.log("Error", error);
     }
   };
 
   const onNewDescription = (e) => {
+    // console.log(e)
     setNewDescription(e.target.value);
   };
 
-  console.log(postDetails?.images);
+  // console.log(postDetails?.images);
 
   return (
     <Container
@@ -98,28 +100,24 @@ export default function PostDetails() {
             ))}
         </Box> */}
         <CardContent>
-          PostDetails
-          <Button onClick={(e) => setEditMode(!editMode)}
-          
-          >Edit</Button>
+          {/* PostDetails */}
+          <Button onClick={(e) => setEditMode(!editMode)}><EditIcon/> </Button>
           {!editMode && 
           <Typography variant="h6" component="h2" noWrap>
             {postDetails?.description}
           </Typography>
-          
           }
-
           {editMode && 
           <>
           <TextField
             name="description"
             value={newDescription.description}
             onChange={onNewDescription}
+            variant="standard" 
             />
-          
-          <Button
-            onClick={() =>
-              updatePosting({
+            
+          <Button 
+            onClick={() =>updatePosting({
                 _id: postDetails._id,
                 description: newDescription,
               })
@@ -130,8 +128,6 @@ export default function PostDetails() {
           </Button>
             </>
           }
-
-          
 
           <Divider />
           <Typography
