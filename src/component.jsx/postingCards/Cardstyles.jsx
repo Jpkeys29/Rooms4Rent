@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Card from '@material-ui/core/Card'
+import { Card } from '@mui/material'
 // import MUIRating from '@material-ui/lab/Rating'
 
 export const Container = styled(Card)`
