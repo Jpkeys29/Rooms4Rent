@@ -46,9 +46,10 @@ const PostRoom = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // if(!PostDetails) {
-    //   return;
-    // }
+    if (roomPosting.area.length === 0 || roomPosting.description.length === 0) {
+      alert('Type area');
+      return;
+    }
 
     let images = [];
     for (const pic of roomPosting.photo) {
