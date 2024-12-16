@@ -3,23 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import client from "../sanityClient";
 import { useState } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Typography,
-  Button,
-} from "@mui/material";
+import {Box,Card,CardContent,CardMedia,Container,Typography,Button,} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import imageUrlBuilder from "@sanity/image-url";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from "@mui/material/Divider";
 import ContactForm from "./ContactForm";
 import EditIcon from '@mui/icons-material/Edit';
+import Grid from '@mui/material/Grid2';
 
-export default function PostDetails() {
+export default function PostDetails({user}) {
   const [postDetails, setPostDetails] = useState(null);
   const [newDescription, setNewDescription] = useState("");
   const [editMode, setEditMode ] = useState(false);
@@ -100,13 +92,13 @@ export default function PostDetails() {
             ))}
         </Box> */}
         <CardContent>
-          {/* PostDetails */}
-          <Button onClick={(e) => setEditMode(!editMode)}><EditIcon/> </Button>
+          <Grid container spacing={2}>
           {!editMode && 
           <Typography variant="h6" component="h2" noWrap>
             {postDetails?.description}
           </Typography>
           }
+          <Button onClick={(e) => setEditMode(!editMode)}><EditIcon/> </Button>
           {editMode && 
           <>
           <TextField
@@ -118,16 +110,17 @@ export default function PostDetails() {
             
           <Button 
             onClick={() =>updatePosting({
-                _id: postDetails._id,
-                description: newDescription,
-              })
-            }
-            disabled={!postDetails}
-            >
+              _id: postDetails._id,
+              description: newDescription,
+            })
+          }
+          disabled={!postDetails}
+          >
             Update
           </Button>
             </>
           }
+          </Grid>
 
           <Divider />
           <Typography
