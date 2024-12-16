@@ -13,6 +13,7 @@ import Avatar from "@mui/material/Avatar";
 import { v4 as uuidv4 } from "uuid";
 import { auth } from "../firebase/config";
 import client from "../sanityClient";
+import PostDetails from "./PostDetails";
 
 const PostRoom = () => {
   const [roomPosting, setRoomPosting] = useState({
@@ -40,10 +41,15 @@ const PostRoom = () => {
       throw error;
     }
   };
-  console.log("roomPosting", roomPosting);
+  // console.log("roomPosting", roomPosting);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // if(!PostDetails) {
+    //   return;
+    // }
+
     let images = [];
     for (const pic of roomPosting.photo) {
       const image_upload_response = await uploadImageToSanity(pic);
@@ -58,6 +64,7 @@ const PostRoom = () => {
       images.push(image);
     }
 
+    
     // After all images are uploaded, create or replace the document
     await client.createOrReplace({
       _id: uuidv4(),
@@ -107,7 +114,6 @@ const PostRoom = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-
         bgcolor: "#f5f5f5",
         p: 2,
       }}
@@ -165,6 +171,7 @@ const PostRoom = () => {
               roomPosting.photo[0] &&
               roomPosting.photo.map((p, i) => (
                 <img
+                key={i}
                   src={p}
                   loading="lazy"
                   alt="Uploaded Preview"
