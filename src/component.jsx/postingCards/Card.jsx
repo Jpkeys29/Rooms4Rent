@@ -1,4 +1,4 @@
-import CardActionArea from '@material-ui/core/CardActionArea'
+import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@material-ui/core/CardContent'
 import { CardMedia } from '@mui/material'
 import Typography from '@material-ui/core/Typography'
