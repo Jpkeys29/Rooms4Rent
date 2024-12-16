@@ -46,7 +46,7 @@ const PostRoom = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (roomPosting.area.length === 0 || roomPosting.description.length === 0) {
+    if (!roomPosting.area || !roomPosting.description) {
       alert('Type area');
       return;
     }
