@@ -29,18 +29,18 @@ const Home = () => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           height: "50%",
-          padding: 3,
+          padding: 6,
         }}
       >
         <div>
           <SearchBar />
         </div>
       </Box>
-      {roomPosting.map((posts, index) => {
+      {/* {roomPosting.slice(0,6).map((posts, index) => {
         return(
             <Post key={index} postings={posts}/>
         )
-      })}
+      })} */}
     </div>
   );
 };
