@@ -10,7 +10,6 @@ import Divider from "@mui/material/Divider";
 import ContactForm from "./ContactForm";
 import EditIcon from '@mui/icons-material/Edit';
 import Grid from '@mui/material/Grid2';
-import CardActionArea from '@mui/material/CardActionArea';
 
 export default function PostDetails({user}) {
   const [postDetails, setPostDetails] = useState(null);
