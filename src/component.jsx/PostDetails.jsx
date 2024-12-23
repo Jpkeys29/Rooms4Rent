@@ -159,12 +159,14 @@ export default function PostDetails({user}) {
 
         </CardContent>
         <Divider />
+        { user && 
         <Button
           sx={{ color: "error.main", mb: 1.5 }}
           onClick={() => deletePosting(postDetails._id)}
         >
           Delete Posting
         </Button>
+        }
       </Card>
     </Container>
   );
