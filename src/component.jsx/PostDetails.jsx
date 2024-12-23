@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import client from "../sanityClient";
 import { useState } from "react";
-import {Box,Card,CardContent,CardMedia,Container,Typography,Button,} from "@mui/material";
+import {Box,Card,CardContent,CardMedia,Container,Typography,Button} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import imageUrlBuilder from "@sanity/image-url";
 import Divider from "@mui/material/Divider";
 import ContactForm from "./ContactForm";
 import EditIcon from '@mui/icons-material/Edit';
 import Grid from '@mui/material/Grid2';
+import { Link } from "react-router-dom";
 
 export default function PostDetails({user}) {
   const [postDetails, setPostDetails] = useState(null);
@@ -155,7 +156,20 @@ export default function PostDetails({user}) {
             {postDetails?.amenities}
           </Typography>
 
-        <ContactForm/>
+        {user ? 
+        (
+          <ContactForm/>
+          ) :
+          (
+            <Link
+            to={'/account'}
+            >
+          <Typography variant="h6" style={{ textDecoration:"none"}}>Contact</Typography>     
+          </Link>
+        )
+      }
+
+        {/* <ContactForm/> */}
 
         </CardContent>
         <Divider />
