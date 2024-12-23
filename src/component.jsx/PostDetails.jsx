@@ -98,7 +98,7 @@ export default function PostDetails({user}) {
             {postDetails?.description}
           </Typography>
           }
-          <Button onClick={(e) => setEditMode(!editMode)}><EditIcon/> </Button>
+          {user && <Button onClick={(e) => setEditMode(!editMode)}><EditIcon/> </Button> }
           {editMode && 
           <>
           <TextField

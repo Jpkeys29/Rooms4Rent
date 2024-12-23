@@ -27,7 +27,7 @@ import RenderedPosting from "./component.jsx/renderedPosting"
 import PostDetails from "./component.jsx/PostDetails"
 
 function App() {
-  console.log(auth?.currentUser?.uid)
+  // console.log(auth?.currentUser?.uid)
   const [user, setUser] = useState(null)
   const [userDetails, setUserDetails] = useState(null);
 
@@ -70,7 +70,7 @@ function App() {
               <HouseIcon sx={{ color: "black", fontSize: "50px" }} />
             </Typography>
             <Typography variant="h4" color="black">
-              Roomye
+              RoomyeNYC
             </Typography >
             </Link>
             </Box>
@@ -89,12 +89,12 @@ function App() {
           <Route path="searchbar" element={<SearchBar />} />
           <Route path="searchresults" element={<SearchResults />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="postdetails" element={<PostDetails/>}/>
+          <Route path="postdetails" element={<PostDetails user={user}/>}/>
           <Route
             path="account"
             element={
               user ? (
-                userDetails? < RenderedAccount userDetails={userDetails} /> : <Account />
+                userDetails? < RenderedAccount userDetails={userDetails} setUserDetails={setUserDetails}/> : <Account />
               ) : (
                 <>
                   <SignIn setUser={setUser} />
